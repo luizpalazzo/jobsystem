@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Cadastro de Job</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link rel="stylesheet" type="text/css"
+	href="../webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+<link rel="stylesheet" th:href="@{/css/main.css}"
+	href="../../css/main.css" />
+
+</head>
+<body>
+
+	<header th:insert="fragments/header.html :: menu"></header>
+
+	<div class="container">
+		<div class="container-fluid">
+			<div class="row">
+			<h2 class = "subtitle">Cadastro de JOB</h2>
+				<div class="col-md-12">
+					<form id = "formJob">
+						<div class="form-group">
+							<label for="name">Nome do job: </label> <input
+								type="text" class="form-control" id="name" name = "name"
+								placeholder="Digite aqui o nome do job">
+						</div>
+						<div class="form-group">
+							<label for="timeSchedule">Horário de execução: </label> <input
+								type="text" class="form-control" id="timeSchedule" name = "timeSchedule"
+								placeholder="Digite no formato HH:MM">
+						</div>
+						<div class="form-group">
+							<label for=monitoringTeam>Time de monitoramento: </label> 
+							<select class="form-control" id="monitoringTeam" name = "monitoringTeam">
+								<option th:each="team : ${teams}" th:value="${team.id}"	th:text="${team.name}"></option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for=incidentTeam>Time de incidentes</label>
+							<select class="form-control" id="incidentTeam" name = "incidentTeam">
+								<option th:each="team : ${teams}" th:value="${team.id}"	th:text="${team.name}"></option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="code">Script PL/SQL</label>
+							<textarea class="form-control" id="code" name = "code"
+								rows="7"></textarea>
+						</div>
+					</form>
+					<button type="button" class="btn btn-primary" onclick = "save();">Cadastrar Job</button>
+					<button type="button" class="btn btn-danger">Cancelar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /.container -->
+	<script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript"
+		src="../webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../js/job.js"></script>
+
+</body>
+</html>
