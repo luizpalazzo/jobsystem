@@ -22,7 +22,7 @@ public class JobExecutionHistory {
 	
 	@ManyToOne
 	@JoinColumn(name = "script_id")
-	private Script script;
+	private Job script;
 	private LocalDate startDate;
 	private LocalDate endDate;
 	private JobStatus status;
@@ -33,10 +33,10 @@ public class JobExecutionHistory {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Script getScript() {
+	public Job getScript() {
 		return script;
 	}
-	public void setScript(Script script) {
+	public void setScript(Job script) {
 		this.script = script;
 	}
 	public LocalDate getStartDate() {

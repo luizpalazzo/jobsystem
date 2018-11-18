@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Jobs cadastrados</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{/css/main.css}" />
+<link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}" />
+
+</head>
+<body>
+	<header th:insert="fragments/header.html :: menu"></header>
+
+	<div class="container">
+
+		<div class="right_col" role="main">
+			<div class="page-title">
+				<div class="title_left">
+					<h1>Jobs</h1>
+					<p>Jobs cadastrados no sistema para execução agendada.</p>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-12 col-sm-12 col-xs-12">
+
+					<div class="x_panel">
+
+						<div class="x_title">
+
+							<a href="/job/insert" class="btn btn-success">Cadastrar novo
+								job</a>
+
+							<div class="clearfix"></div>
+						</div>
+
+						<div class="avisos"></div>
+
+						<div class="alerta-modal"></div>
+
+
+						<table id="table-jobs" class="table table-striped table-bordered">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>NOME</th>
+									<th>HORÁRIO DE EXECUÇÃO</th>
+									<th>EQUIPE DE MONITORAMENTO</th>
+									<th>EQUIPE DE INCIDENTES</th>
+									<th>AÇÃO</th>
+								</tr>
+							</thead>
+							<tbody>
+								<th:block th:each="job : ${jobs}">
+									<tr>
+										<td id="id" th:text="${job.id}">ID</td>
+										<td id="name" th:text="${job.name}">NOME</td>
+										<td id="timeSchedule" th:text="${job.timeSchedule}">HORÁRIO
+											DE EXECUÇÃO</td>
+										<td id="monitoringTeam" th:text="${job.monitoringTeam.name}">TIME
+											MONITORAMENTO</td>
+										<td id="incidentTeam" th:text="${job.incidentTeam.name}">TIME
+											INCIDENTES</td>
+										<td>
+										<a class = "btn btn-warning glyphicon glyphicon-edit" th:href = "@{/job/edit/{id} (id = ${job.id})}"></a>
+										<button class = "btn btn-danger glyphicon glyphicon-trash" th:id = "${job.id}" onclick = "delete_job(this.id);"></button>
+										</td>
+										
+									</tr>
+								</th:block>
+
+							</tbody>
+						</table>
+
+
+
+					</div>
+				</div>
+			</div>
+
+
+
+		</div>
+
+	</div>
+	<!-- /.container -->
+	<script type="text/javascript" th:src="@{/js/jquery-3.3.1.min.js}"></script>
+	<script type="text/javascript" th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/jquery-ui.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/job.js}"></script>
+
+</body>
+</html>

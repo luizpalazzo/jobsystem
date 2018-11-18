@@ -21,7 +21,7 @@ public class Incident {
 	
 	@ManyToOne
 	@JoinColumn(name = "script_id")
-	private Script script;
+	private Job script;
 	
 	private String log;
 	private IncidentStatus status;
@@ -33,10 +33,10 @@ public class Incident {
 	public void setTicketNumber(Long ticketNumber) {
 		this.ticketNumber = ticketNumber;
 	}
-	public Script getScript() {
+	public Job getScript() {
 		return script;
 	}
-	public void setScript(Script script) {
+	public void setScript(Job script) {
 		this.script = script;
 	}
 	public String getLog() {

@@ -24,3 +24,27 @@ function save() {
         }
 });
 }
+
+function delete_job(id){
+	var data = {}
+	data["id"] = id;
+	console.log(id);
+	
+	$.ajax({
+        type: "DELETE",
+        contentType: "application/json",
+        url: "/job/delete",
+        data: JSON.stringify(data),
+        dataType: 'json',
+        timeout: 600000,
+        success: function (response) {
+            alert("deu certo");
+            //...
+        },
+        error: function (response) {
+        	 alert("deu errado");
+             //...
+        }
+});
+	
+}

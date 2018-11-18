@@ -10,9 +10,9 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "jobsystem_script")
-public class Script {
-	
+@Table(name = "jobsystem_job")
+public class Job {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "script_seq")
 	@SequenceGenerator(sequenceName = "script_seq", allocationSize = 1, name = "script_seq")

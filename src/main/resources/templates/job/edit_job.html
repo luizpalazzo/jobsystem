@@ -23,12 +23,12 @@
 						<div class="form-group">
 							<label for="name">Nome do job: </label> 
 							<input type="text" class="form-control" id="name" name = "name"
-								placeholder="Digite aqui o nome do job">
+								placeholder="Digite aqui o nome do job" th:value = "${selectedJob.name}">
 						</div>
 						<div class="form-group">
 							<label for="timeSchedule">Horário de execução: </label>
 							<input type="text" class="form-control" id="timeSchedule" name = "timeSchedule"
-								placeholder="Digite no formato HH:MM">
+								placeholder="Digite no formato HH:MM" th:value = "${selectedJob.timeSchedule}">
 						</div>
 						<div class="form-group">
 							<label for=monitoringTeam>Time de monitoramento: </label> 
@@ -45,7 +45,7 @@
 						<div class="form-group">
 							<label for="code">Script PL/SQL</label>
 							<textarea class="form-control" id="code" name = "code"
-								rows="7"></textarea>
+								rows="7" th:text: = "${selectedJob.code}"></textarea>
 						</div>
 					</form>
 					<button type="button" class="btn btn-primary" onclick = "save();">Cadastrar Job</button>

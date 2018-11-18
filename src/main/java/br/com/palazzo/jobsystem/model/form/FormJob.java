@@ -1,6 +1,6 @@
 package br.com.palazzo.jobsystem.model.form;
 
-public class FormScript {
+public class FormJob {
 	
 	private String name;
 	private String timeSchedule;

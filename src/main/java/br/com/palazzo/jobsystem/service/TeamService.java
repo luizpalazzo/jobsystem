@@ -1,6 +1,7 @@
 package br.com.palazzo.jobsystem.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,4 +23,8 @@ public class TeamService {
 		return repository.findAll();
 	}
 	
+	public Optional<Team> findById(long id) {
+		return repository.findById(id);
+	}	
+
 }
