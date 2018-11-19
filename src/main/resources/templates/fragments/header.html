@@ -1,14 +1,16 @@
-<nav class="navbar navbar-inverse" th:fragment="menu">
-		<div class="container">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="#">Job Schedule System</a>
+<html xmlns:th="http://www.thymeleaf.org">
+	<nav class="navbar navbar-inverse" th:fragment="menu">
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">Job Schedule System</a>
+				</div>
+				<div id="navbar" class="collapse navbar-collapse">
+					<ul class="nav navbar-nav">
+						<li><a href = "/">Home</a></li>
+						<li><a href="/job/list">Jobs</a></li>
+						<li><a href="chamados.html">Chamados</a></li>
+					</ul>
+				</div>
 			</div>
-			<div id="navbar" class="collapse navbar-collapse">
-				<ul class="nav navbar-nav">
-					<li><a href = "/">Home</a></li>
-					<li><a href="/job/insert">Jobs</a></li>
-					<li><a href="chamados.html">Chamados</a></li>
-				</ul>
-			</div>
-		</div>
-</nav>
+	</nav>
+</html>
