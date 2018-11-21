@@ -2,12 +2,19 @@ package br.com.palazzo.jobsystem.model.form;
 
 public class FormJob {
 	
+	private String id;
 	private String name;
 	private String timeSchedule;
 	private String monitoringTeam;
 	private String incidentTeam;
 	private String code;
 	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public String getName() {
 		return name;
 	}
@@ -41,8 +48,10 @@ public class FormJob {
 	
 	@Override
 	public String toString() {
-		return "Script [name=" + name + ", timeSchedule=" + timeSchedule + ", monitoringTeam=" + monitoringTeam
-				+ ", incidentTeam=" + incidentTeam + ", code=" + code + "]";
+		return "FormJob [id=" + id + ", name=" + name + ", timeSchedule=" + timeSchedule + ", monitoringTeam="
+				+ monitoringTeam + ", incidentTeam=" + incidentTeam + ", code=" + code + "]";
 	}
+
+	
 
 }

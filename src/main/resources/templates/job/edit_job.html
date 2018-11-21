@@ -23,12 +23,12 @@
 						<div class="form-group">
 							<label for="name">Nome do job: </label> 
 							<input type="text" class="form-control" id="name" name = "name"
-								placeholder="Digite aqui o nome do job" th:value = "${selectedJob.name}">
+								placeholder="Digite aqui o nome do job" th:value="${job.name}">
 						</div>
 						<div class="form-group">
 							<label for="timeSchedule">Horário de execução: </label>
 							<input type="text" class="form-control" id="timeSchedule" name = "timeSchedule"
-								placeholder="Digite no formato HH:MM" th:value = "${selectedJob.timeSchedule}">
+								placeholder="Digite no formato HH:MM" th:value="${job.timeSchedule}" >
 						</div>
 						<div class="form-group">
 							<label for=monitoringTeam>Time de monitoramento: </label> 
@@ -45,11 +45,15 @@
 						<div class="form-group">
 							<label for="code">Script PL/SQL</label>
 							<textarea class="form-control" id="code" name = "code"
-								rows="7" th:text: = "${selectedJob.code}"></textarea>
+								rows="7" th:text="${job.code}"></textarea>
 						</div>
+						
+						<input type = "hidden" id = "original_id" th:value="${job.id}"/>
+						<input type = "hidden" id = "original_monitoring" th:value="${job.monitoringTeam.name}"/>
+						<input type = "hidden" id = "original_incident" th:value="${job.incidentTeam.name}"/>
+						
 					</form>
-					<button type="button" class="btn btn-primary" onclick = "save();">Cadastrar Job</button>
-					<button type="button" class="btn btn-danger">Cancelar</button>
+					<button type="button" class="btn btn-primary" onclick = "save();">Editar Job</button>
 				</div>
 			</div>
 		</div>

@@ -1,5 +1,7 @@
 package br.com.palazzo.jobsystem.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +22,8 @@ import br.com.palazzo.jobsystem.service.TeamService;
 @Controller
 @RequestMapping("/job")
 public class JobController {
-	
+
+
 	TeamService teamService;
 	JobService jobService;
 	
@@ -40,11 +43,16 @@ public class JobController {
     public @ResponseBody ResponseEntity<FormJob> saveJob(@RequestBody FormJob form) {
 
         System.out.println(form);
+        System.out.println(form.getId());
         
         Team monitoringTeam = teamService.findById(Long.valueOf(form.getMonitoringTeam())).get();
         Team incidentTeam = teamService.findById(Long.valueOf(form.getIncidentTeam())).get();
         
         Job job = new Job();
+        
+        if(form.getId() != null) {
+        	job.setId(Long.valueOf(form.getId()));
+        }
         
         job.setCode(form.getCode());
         job.setName(form.getName());
@@ -67,7 +75,7 @@ public class JobController {
     	System.out.println(job);
     	ModelAndView mv = new ModelAndView("job/edit_job");
     	mv.addObject("teams", teamService.findAll());
-    	mv.addObject("selectedJob",job);
+    	mv.addObject("job",job);
     	return mv;
     }
     
@@ -76,5 +84,21 @@ public class JobController {
     	System.out.println("ID ->>>"+job.getId());
     		jobService.delete(job.getId());
     		return new ResponseEntity<Job>(job, HttpStatus.OK);
+    }
+    
+    @RequestMapping(value = {"/execute"}, method = RequestMethod.POST)
+    public ResponseEntity<Job> executeJob(@RequestBody Job job){
+    	System.out.println("ID ->>>"+job.getId());
+    	Optional<Job> jobtoExecute = jobService.findById(Long.valueOf(job.getId()));
+    	System.out.println("CODE ->>>"+jobtoExecute.get().getCode());
+    		try {
+				jobService.executeScript2(jobtoExecute.get().getCode());
+				return new ResponseEntity<Job>(job, HttpStatus.OK);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return new ResponseEntity<Job>(job, HttpStatus.BAD_REQUEST);
+			}
+    		
     }
 }
