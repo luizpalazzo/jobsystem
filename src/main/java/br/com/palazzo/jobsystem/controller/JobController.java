@@ -1,6 +1,6 @@
 package br.com.palazzo.jobsystem.controller;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,12 +101,12 @@ public class JobController {
 		JobExecutionHistory execution = new JobExecutionHistory();
 		
 		execution.setJob(job);
-		execution.setStartDate(LocalDate.now());
+		execution.setStartDate(LocalDateTime.now());
 		
     		try {
     			jobService.executeScript(jobtoExecute.get().getCode());
     			
-    			execution.setEndDate(LocalDate.now());
+    			execution.setEndDate(LocalDateTime.now());
     			execution.setStatus(JobStatus.SUCCESS);
     			
     			executionService.save(execution);
@@ -115,7 +115,7 @@ public class JobController {
 			} catch (Exception e) {
 				e.printStackTrace();
 				
-				execution.setEndDate(LocalDate.now());
+				execution.setEndDate(LocalDateTime.now());
     			execution.setStatus(JobStatus.ERROR);
     			
     			executionService.save(execution);

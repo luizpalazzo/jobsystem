@@ -1,6 +1,6 @@
 package br.com.palazzo.jobsystem.model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,8 +23,8 @@ public class JobExecutionHistory {
 	@ManyToOne
 	@JoinColumn(name = "job_id")
 	private Job job;
-	private LocalDate startDate;
-	private LocalDate endDate;
+	private LocalDateTime startDate;
+	private LocalDateTime endDate;
 	private JobStatus status;
 	
 	public Long getId() {
@@ -39,16 +39,17 @@ public class JobExecutionHistory {
 	public void setJob(Job job) {
 		this.job = job;
 	}
-	public LocalDate getStartDate() {
+	
+	public LocalDateTime getStartDate() {
 		return startDate;
 	}
-	public void setStartDate(LocalDate startDate) {
+	public void setStartDate(LocalDateTime startDate) {
 		this.startDate = startDate;
 	}
-	public LocalDate getEndDate() {
+	public LocalDateTime getEndDate() {
 		return endDate;
 	}
-	public void setEndDate(LocalDate endDate) {
+	public void setEndDate(LocalDateTime endDate) {
 		this.endDate = endDate;
 	}
 	public JobStatus getStatus() {
