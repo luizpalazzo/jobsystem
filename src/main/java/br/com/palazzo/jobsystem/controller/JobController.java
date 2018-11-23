@@ -1,5 +1,6 @@
 package br.com.palazzo.jobsystem.controller;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +15,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.palazzo.jobsystem.model.Job;
+import br.com.palazzo.jobsystem.model.JobExecutionHistory;
+import br.com.palazzo.jobsystem.model.JobStatus;
 import br.com.palazzo.jobsystem.model.Team;
 import br.com.palazzo.jobsystem.model.form.FormJob;
+import br.com.palazzo.jobsystem.service.JobHistoryService;
 import br.com.palazzo.jobsystem.service.JobService;
 import br.com.palazzo.jobsystem.service.TeamService;
 
@@ -26,11 +30,13 @@ public class JobController {
 
 	TeamService teamService;
 	JobService jobService;
+	JobHistoryService executionService;
 	
 	@Autowired
-	public JobController(TeamService teamService, JobService jobService) {
+	public JobController(TeamService teamService, JobService jobService, JobHistoryService executionService) {
 		this.teamService = teamService;
 		this.jobService = jobService;
+		this.executionService = executionService;
 	}
 
     @RequestMapping(value = "/insert" , method = RequestMethod.GET)
@@ -91,12 +97,30 @@ public class JobController {
     	System.out.println("ID ->>>"+job.getId());
     	Optional<Job> jobtoExecute = jobService.findById(Long.valueOf(job.getId()));
     	System.out.println("CODE ->>>"+jobtoExecute.get().getCode());
+    	
+		JobExecutionHistory execution = new JobExecutionHistory();
+		
+		execution.setJob(job);
+		execution.setStartDate(LocalDate.now());
+		
     		try {
-				jobService.executeScript2(jobtoExecute.get().getCode());
+    			jobService.executeScript(jobtoExecute.get().getCode());
+    			
+    			execution.setEndDate(LocalDate.now());
+    			execution.setStatus(JobStatus.SUCCESS);
+    			
+    			executionService.save(execution);
+    			
 				return new ResponseEntity<Job>(job, HttpStatus.OK);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
+				
+				execution.setEndDate(LocalDate.now());
+    			execution.setStatus(JobStatus.ERROR);
+    			
+    			executionService.save(execution);
+    			
+				//criar o ticket
 				return new ResponseEntity<Job>(job, HttpStatus.BAD_REQUEST);
 			}
     		

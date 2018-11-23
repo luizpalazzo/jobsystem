@@ -37,7 +37,7 @@ public class JobService {
 		repository.deleteById(id);
 	}
     
-    public void executeScript2(String script) throws ClassNotFoundException, SQLException {
+    public void executeScript(String script) throws ClassNotFoundException, SQLException {
     	Oracle.executeScript(script);
     }
 

@@ -21,8 +21,8 @@ public class JobExecutionHistory {
 	private Long id;
 	
 	@ManyToOne
-	@JoinColumn(name = "script_id")
-	private Job script;
+	@JoinColumn(name = "job_id")
+	private Job job;
 	private LocalDate startDate;
 	private LocalDate endDate;
 	private JobStatus status;
@@ -33,11 +33,11 @@ public class JobExecutionHistory {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Job getScript() {
-		return script;
+	public Job getJob() {
+		return job;
 	}
-	public void setScript(Job script) {
-		this.script = script;
+	public void setJob(Job job) {
+		this.job = job;
 	}
 	public LocalDate getStartDate() {
 		return startDate;
@@ -60,7 +60,7 @@ public class JobExecutionHistory {
 	
 	@Override
 	public String toString() {
-		return "JobExecutionHistory [id=" + id + ", script=" + script + ", startDate=" + startDate + ", endDate="
+		return "JobExecutionHistory [id=" + id + ", job=" + job + ", startDate=" + startDate + ", endDate="
 				+ endDate + ", status=" + status + "]";
 	}
 	

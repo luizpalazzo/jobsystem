@@ -4,6 +4,7 @@ public enum JobStatus {
 	
 	RUNNING("Running"),
 	ERROR("Error"),
+	SUCCESS("Success"),
 	WAITING("Waiting");
 	
 	private String description;
