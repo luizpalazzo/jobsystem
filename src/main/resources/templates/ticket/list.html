@@ -9,6 +9,7 @@
 <link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}" />
 <link rel="stylesheet" th:href="@{/css/jquery.dataTables.min.css}" />
 
+
 </head>
 <body>
 	<header th:insert="fragments/header.html :: menu"></header>
@@ -18,8 +19,8 @@
 		<div class="right_col" role="main">
 			<div class="page-title">
 				<div class="title_left">
-					<h1>Execuções</h1>
-					<p>Histórico de execuções dos jobs.</p>
+					<h1>Chamados</h1>
+					<p>Histórico de chamados.</p>
 				</div>
 			</div>
 
@@ -42,26 +43,39 @@
 						<table id="table-jobs" class="table table-striped table-bordered">
 							<thead>
 								<tr>
-									<th>ID</th>
+									<th>TICKET</th>
 									<th>JOB</th>
-									<th>INÍCIO</th>
-									<th>FIM</th>
+									<th>EQUIPE DE TRATAMENTO</th>
 									<th>STATUS</th>
+									<th>DATA</th>
+									<th>LOG</th>
+									<th>ENCERRAR</th>
+									<th>RESOLUÇÃO</th>
 								</tr>
 							</thead>
 							<tbody>
-								<th:block th:each="execution : ${executions}">
+								<th:block th:each="ticket : ${tickets}">
 									<tr>
-										<td id="id" th:text="${execution.id}">ID</td>
-										<td id="name" th:text="${execution.job.name}">NOME</td>
-										<td id="start" th:text="${execution.startDate}">INICIO</td>
-										<td id="end" th:text="${execution.endDate}">FIM</td>
-										<td id="status" th:text="${execution.status}">STATUS</td>										
+										<td id="id" th:text="${ticket.ticketNumber}">ID</td>
+										<td id="name" th:text="${ticket.job.name}">JOB</td>
+										<td id="incidentTeam" th:text="${ticket.job.incidentTeam}">JOB</td>
+										<td id="start" th:text="${ticket.status}">STATUS</td>
+										<td id="end" th:text="${ticket.eventDate}">DATA</td>
+										<td>
+											<button class = "btn btn-success glyphicon glyphicon-eye-open" th:id = "${ticket.ticketNumber}" onclick = "get_log(this.id);"></button>
+										</td>	
+										<td>
+											<button class = "btn btn-success glyphicon glyphicon-ok-circle" th:id = "${ticket.ticketNumber}" onclick = "close_ticket(this.id);"></button>
+										</td>
+										<td>
+											<button class = "btn btn-success glyphicon glyphicon-education" th:id = "${ticket.ticketNumber}" onclick = "get_solution(this.id);"></button>
+										</td>
 									</tr>
 								</th:block>
 
 							</tbody>
 						</table>
+
 
 
 
@@ -74,11 +88,16 @@
 		</div>
 
 	</div>
+	<div id="dialog-confirm" title="Deseja encerrar o chamado?" style = "display: none">
+  		<p>Digite a ação tomada no tratamento do chamado:</p>
+  		<textarea id = "closure" style = "width: 100%; height: 100%"></textarea>
+	</div>
+	
 	<!-- /.container -->
 	<script type="text/javascript" th:src="@{/js/jquery-3.3.1.min.js}"></script>
 	<script type="text/javascript" th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
-	<script type="text/javascript" th:src="@{/js/jquery.dataTables.min.js}"></script>
 	<script type="text/javascript" th:src="@{/js/jquery-ui.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/jquery.dataTables.min.js}"></script>
 	<script type="text/javascript" th:src="@{/js/job.js}"></script>
 </body>
 </html>

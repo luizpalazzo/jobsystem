@@ -40,11 +40,7 @@ public class Team {
 	
 	@Override
 	public String toString() {
-		return "Team [id=" + id + ", name=" + name + ", email=" + email + "]";
+		return name+" - "+email;
 	}
-	
-	
-	
-	
 
 }

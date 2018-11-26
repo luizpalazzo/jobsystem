@@ -1,6 +1,6 @@
 package br.com.palazzo.jobsystem.util;
 import java.sql.*;  
-public class Oracle {
+public class OracleUtils {
 	
 	public static void executeScript(String script) throws ClassNotFoundException, SQLException {
 		

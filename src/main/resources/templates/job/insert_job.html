@@ -31,13 +31,13 @@
 								placeholder="Digite no formato HH:MM">
 						</div>
 						<div class="form-group">
-							<label for=monitoringTeam>Time de monitoramento: </label> 
+							<label for=monitoringTeam>Equipe de desenvolvimento: </label> 
 							<select class="form-control" id="monitoringTeam" name = "monitoringTeam">
 								<option th:each="team : ${teams}" th:value="${team.id}"	th:text="${team.name}"></option>
 							</select>
 						</div>
 						<div class="form-group">
-							<label for=incidentTeam>Time de incidentes</label>
+							<label for=incidentTeam>Equipe de incidentes</label>
 							<select class="form-control" id="incidentTeam" name = "incidentTeam">
 								<option th:each="team : ${teams}" th:value="${team.id}"	th:text="${team.name}"></option>
 							</select>
@@ -60,6 +60,7 @@
 	<script type="text/javascript" th:src="@{/js/jquery-3.3.1.min.js}"></script>
 	<script type="text/javascript" th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
 	<script type="text/javascript" th:src="@{/js/job.js}"></script>
+	<script type="text/javascript" th:src="@{/js/form.js}"></script>
 
 </body>
 </html>

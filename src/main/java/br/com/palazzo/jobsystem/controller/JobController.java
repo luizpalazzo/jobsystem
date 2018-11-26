@@ -19,6 +19,7 @@ import br.com.palazzo.jobsystem.model.JobExecutionHistory;
 import br.com.palazzo.jobsystem.model.JobStatus;
 import br.com.palazzo.jobsystem.model.Team;
 import br.com.palazzo.jobsystem.model.form.FormJob;
+import br.com.palazzo.jobsystem.service.IncidentService;
 import br.com.palazzo.jobsystem.service.JobHistoryService;
 import br.com.palazzo.jobsystem.service.JobService;
 import br.com.palazzo.jobsystem.service.TeamService;
@@ -31,12 +32,14 @@ public class JobController {
 	TeamService teamService;
 	JobService jobService;
 	JobHistoryService executionService;
+	IncidentService incidentService;
 	
 	@Autowired
-	public JobController(TeamService teamService, JobService jobService, JobHistoryService executionService) {
+	public JobController(TeamService teamService, JobService jobService, JobHistoryService executionService, IncidentService incidentService) {
 		this.teamService = teamService;
 		this.jobService = jobService;
 		this.executionService = executionService;
+		this.incidentService = incidentService;
 	}
 
     @RequestMapping(value = "/insert" , method = RequestMethod.GET)
@@ -88,8 +91,13 @@ public class JobController {
     @RequestMapping(value = {"/delete"}, method = RequestMethod.DELETE)
     public ResponseEntity<Job> deleteJob(@RequestBody Job job){
     	System.out.println("ID ->>>"+job.getId());
-    		jobService.delete(job.getId());
-    		return new ResponseEntity<Job>(job, HttpStatus.OK);
+    		try {
+    			jobService.delete(job.getId());
+    			return new ResponseEntity<Job>(job, HttpStatus.OK);
+    		}catch(Exception e) {
+    			return new ResponseEntity<Job>(job, HttpStatus.BAD_REQUEST);
+    		}
+	
     }
     
     @RequestMapping(value = {"/execute"}, method = RequestMethod.POST)
@@ -113,16 +121,18 @@ public class JobController {
     			
 				return new ResponseEntity<Job>(job, HttpStatus.OK);
 			} catch (Exception e) {
-				e.printStackTrace();
 				
 				execution.setEndDate(LocalDateTime.now());
     			execution.setStatus(JobStatus.ERROR);
     			
     			executionService.save(execution);
     			
-				//criar o ticket
+				incidentService.save(incidentService.createTicket(job, e));
+    			
 				return new ResponseEntity<Job>(job, HttpStatus.BAD_REQUEST);
 			}
     		
     }
+    
+
 }

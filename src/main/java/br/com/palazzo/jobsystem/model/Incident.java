@@ -1,6 +1,6 @@
 package br.com.palazzo.jobsystem.model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,11 +21,12 @@ public class Incident {
 	
 	@ManyToOne
 	@JoinColumn(name = "script_id")
-	private Job script;
+	private Job job;
 	
 	private String log;
 	private IncidentStatus status;
-	private LocalDate eventDate;
+	private LocalDateTime eventDate;
+	private String closure;
 	
 	public Long getTicketNumber() {
 		return ticketNumber;
@@ -33,11 +34,12 @@ public class Incident {
 	public void setTicketNumber(Long ticketNumber) {
 		this.ticketNumber = ticketNumber;
 	}
-	public Job getScript() {
-		return script;
+
+	public Job getJob() {
+		return job;
 	}
-	public void setScript(Job script) {
-		this.script = script;
+	public void setJob(Job job) {
+		this.job = job;
 	}
 	public String getLog() {
 		return log;
@@ -51,18 +53,23 @@ public class Incident {
 	public void setStatus(IncidentStatus status) {
 		this.status = status;
 	}
-	public LocalDate getEventDate() {
+	public LocalDateTime getEventDate() {
 		return eventDate;
 	}
-	public void setEventDate(LocalDate eventDate) {
+	public void setEventDate(LocalDateTime eventDate) {
 		this.eventDate = eventDate;
+	}
+	public String getClosure() {
+		return closure;
+	}
+	public void setClosure(String closure) {
+		this.closure = closure;
 	}
 	
 	@Override
 	public String toString() {
-		return "Incident [ticketNumber=" + ticketNumber + ", script=" + script + ", log=" + log + ", status=" + status
-				+ ", eventDate=" + eventDate + "]";
+		return "Incident [ticketNumber=" + ticketNumber + ", job=" + job + ", log=" + log + ", status=" + status
+				+ ", eventDate=" + eventDate + ", closure=" + closure + "]";
 	}
-	
 
 }

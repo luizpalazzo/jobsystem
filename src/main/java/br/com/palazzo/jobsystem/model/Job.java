@@ -8,6 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "jobsystem_job")
@@ -18,7 +19,10 @@ public class Job {
 	@SequenceGenerator(sequenceName = "script_seq", allocationSize = 1, name = "script_seq")
 	private Long id;
 	
+	@NotEmpty
 	private String name;
+	
+	@NotEmpty
 	private String timeSchedule;
 	
 	@ManyToOne
@@ -29,6 +33,7 @@ public class Job {
 	@JoinColumn(name = "incident_team")
 	private Team incidentTeam;
 	
+	@NotEmpty
 	private String code;
 	
 	public Long getId() {

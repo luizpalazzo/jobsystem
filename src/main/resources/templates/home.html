@@ -4,27 +4,25 @@
 <title>Job Schedule System</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-<link rel="stylesheet" type="text/css"
-	href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
-
-<link rel="stylesheet" th:href="@{/css/main.css}"
-	href="../../css/main.css" />
+<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{/css/main.css}" />
 
 </head>
 <body>
 
 	<header th:insert="fragments/header.html :: menu"></header>
+	
+	<input type = "hidden" id = "qtyOpened" th:value = "${qtyOpened}" />
+	<input type = "hidden" id = "qtySolved" th:value = "${qtySolved}" />
 
 	<div class="container">
 		<div id="opened_tickets_chart"></div>
 	</div>
 	<!-- /.container -->
-	<script type = "text/javascript" src="/js/jquery-3.3.1.min.js"></script>
-	<script type="text/javascript"
-		src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script type="text/javascript"
-		src="https://www.gstatic.com/charts/loader.js"></script>
-	<script type="text/javascript" src="/js/opened_tickets_chart.js"></script>
+	<script type="text/javascript" th:src="@{/js/jquery-3.3.1.min.js}"></script>
+	<script type="text/javascript" th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>	
+	<script type="text/javascript" th:src="@{/js/charts_loader.js}"></script>
+	<script type="text/javascript" th:src="@{/js/opened_tickets_chart.js}"></script>
 
 </body>
 </html>
