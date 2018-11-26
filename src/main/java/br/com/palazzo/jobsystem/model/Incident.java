@@ -2,6 +2,7 @@ package br.com.palazzo.jobsystem.model;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,6 +24,7 @@ public class Incident {
 	@JoinColumn(name = "script_id")
 	private Job job;
 	
+	@Column(length = 1500)
 	private String log;
 	private IncidentStatus status;
 	private LocalDateTime eventDate;

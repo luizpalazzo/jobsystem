@@ -1,5 +1,6 @@
 package br.com.palazzo.jobsystem.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -34,6 +35,7 @@ public class Job {
 	private Team incidentTeam;
 	
 	@NotEmpty
+	@Column(length = 1500)
 	private String code;
 	
 	public Long getId() {
